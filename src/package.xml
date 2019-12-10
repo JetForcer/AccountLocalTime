@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>BillingTimeUtil</members>
+        <members>LocalTimeConfigurationController</members>
+        <members>UpdateDstOffsetJob</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>UpdateDstOffsetOnAccount</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>localTimeCustomization</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>
+    <types>
+        <members>Account</members>
+        <members>Opportunity</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Opportunity.Customize_Local_Time_Classic</members>
+        <members>Opportunity.Customize_Local_Time_Lightning</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>settings</members>
+        <name>StaticResource</name>
+    </types>
+    <version>46.0</version>
+</Package>
