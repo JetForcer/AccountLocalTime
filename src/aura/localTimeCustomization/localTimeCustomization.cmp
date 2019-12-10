@@ -1,0 +1,70 @@
+<aura:component description="FormForSaveRecord"
+                controller="LocalTimeConfigurationController"
+                implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="opportunityRecord" type="Opportunity"/>
+    <aura:attribute name="useGeolocation" type="Boolean"/>
+    <aura:attribute name="use12HoursFormat" type="Boolean"/>
+    <!--  TODO: add error handler  -->
+    <aura:attribute name="recordLoadError" type="String"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Name,Id,Use_Geolocation__c,Use_12_Hour_Format__c"
+                      targetFields="{!v.opportunityRecord}"
+                      targetError="{!v.recordLoadError}"
+    />
+
+    <!-- Display a header with details about the Opportunity -->
+    <div class="slds-page-header" role="banner">
+        <lightning:recordViewForm recordId="{!v.recordId}"
+                                  objectApiName="Opportunity">
+
+            <div class="slds-text-heading_label">
+                <lightning:outputField fieldName="Name" variant="label-hidden"/>
+            </div>
+            <lightning:messages/>
+            <h1 class="slds-page-header__title slds-m-right_small
+                      slds-truncate slds-align-left">Customize Account local time</h1>
+        </lightning:recordViewForm>
+    </div>
+
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordLoadError))}">
+        <div class="recordError">
+            <ui:message title="Error" severity="error" closable="true">
+                    {!v.recordLoadError}
+            </ui:message>
+        </div>
+    </aura:if>
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="4">
+            <form class="slds-form--stacked">
+                <lightning:input
+                        type="checkbox"
+                        label="Use Geolocation"
+                        name="use-geolocation"
+                        checked="{!v.useGeolocation}"
+                        value="{!v.useGeolocation}"/>
+                <lightning:input
+                        type="checkbox"
+                        label="Use 12 Hours format"
+                        name="use-12-hours-format"
+                        checked="{!v.use12HoursFormat}"
+                        value="{!v.use12HoursFormat}"/>
+                <br/>
+                <div class="slds-m-top--medium">
+                    <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
+                    <lightning:button onclick="{!c.saveOpportunity}"
+                                      variant="brand"
+                                      iconName="utility:save"
+                                      accesskey="s"
+                                      label="Save"/>
+                </div>
+            </form>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
