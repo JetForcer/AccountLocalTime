@@ -24,6 +24,10 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>*</members>
+        <name>Profile</name>
+    </types>
+    <types>
         <members>Opportunity.Customize_Local_Time_Classic</members>
         <members>Opportunity.Customize_Local_Time_Lightning</members>
         <name>QuickAction</name>
