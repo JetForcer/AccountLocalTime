@@ -10,14 +10,13 @@ public class BillingTimeUtil {
 	}
 
 	/*
-	 * The reason why sObjects can’t be passed as arguments to future methods is because the sObject might change between the time you call
-	 * the method and the time it executes.
+	 * The reason why sObjects can’t be passed as arguments to future methods is because the sObject might change
+	 * between the time you call the method, and the time it executes.
 	 */
 	@future(callout = true)
 	public static void fetchAndInsertData(Id accountId) {
 		Account acc = getAccount(accountId);
 		if (acc.BillingLatitude == null || acc.BillingLongitude == null) {
-			System.debug('latitude or longitude null');
 			return;
 		}
 
@@ -95,15 +94,16 @@ public class BillingTimeUtil {
 	}
 
 	private static Account getAccount(Id accountId) {
-		List<Account> accs = [SELECT Id, BillingLatitude, BillingLongitude FROM Account WHERE Id = : accountId LIMIT 1];
-		System.debug('accounts: ' + accs);
-		return accs[0];
+		return [SELECT Id, BillingLatitude, BillingLongitude FROM Account WHERE Id = : accountId LIMIT 1];
 	}
 
 	private static Dom.Document fetchGeolocation(Account acc) {
-		String restUrl =
-				'http://api.geonames.org/timezone?lat=' + acc.BillingLatitude + '&lng=' + acc.BillingLongitude +
-				'&username=jetforcer';
+		String restUrl
+				= 'http://api.geonames.org/timezone?lat='
+				+ acc.BillingLatitude
+				+ '&lng='
+				+ acc.BillingLongitude
+				+ '&username=jetforcer';
 
 		Http h = new Http();
 		HttpRequest req = new HttpRequest();
@@ -111,9 +111,7 @@ public class BillingTimeUtil {
 		req.setMethod('POST');
 		req.setHeader('Content-Type', 'charset=UTF-8');
 		HttpResponse res = h.send(req);
-		Dom.Document body = res.getBodyDocument();
-		System.debug(res.getBody());
 
-		return body;
+		return res.getBodyDocument();
 	}
 }
