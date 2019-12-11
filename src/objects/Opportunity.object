@@ -168,7 +168,7 @@
     <fields>
         <fullName>Billing_Hours__c</fullName>
         <externalId>false</externalId>
-        <formula>TEXT(IF(Use_12_Hour_Format__c, Hours_12_format__c, Hour__c))</formula>
+        <formula>TEXT(IF(Use_12_Hour_Format__c, Hours_12_format__c, Hour__c + Offset__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Billing Hours</label>
         <required>false</required>
@@ -218,7 +218,7 @@
     <fields>
         <fullName>Country_Icon__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IMAGE(&quot;https://bit.ly/2p4WwD0&quot;, &quot;US&quot;, 13, 16))</formula>
+        <formula>IF(Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IF(Account.BillingCountry == &quot;US&quot;,IMAGE(&quot;https://bit.ly/2p4WwD0&quot;, &quot;US&quot;, 13, 16), &quot;&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Country Icon</label>
         <required>false</required>
