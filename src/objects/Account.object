@@ -491,10 +491,10 @@
         <fullName>USA_Offset__c</fullName>
         <externalId>false</externalId>
         <formula>IF(CONTAINS($Label.States_In_GMT_Minus_8, BillingState), -8,
- IF(CONTAINS($Label.States_In_GMT_Minus_7, BillingState), -7,
-  IF(CONTAINS($Label.States_In_GMT_Minus_6, BillingState), -6, 0
+  IF(CONTAINS($Label.States_In_GMT_Minus_7, BillingState), -7,
+    IF(CONTAINS($Label.States_In_GMT_Minus_6, BillingState), -6, 0
+    )
   )
- )
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>USA_Offset</label>
