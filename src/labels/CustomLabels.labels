@@ -5,14 +5,14 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Represents names of states</shortDescription>
-        <value>Connecticut:Delaware:Florida:Georgia:Indiana:Kentucky:Massachusetts:Michigan:New Jersey:New York:Ohio:Pennsylvania:Vermont:Virginia:Washington:West Virginia</value>
+        <value>Connecticut:Florida:Georgia:Indiana:Kentucky:Massachusetts:Michigan:New Jersey:New York:Pennsylvania:Virginia:Washington</value>
     </labels>
     <labels>
         <fullName>States_In_GMT_Minus_6</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Represents names of states</shortDescription>
-        <value>Illinois:Iowa:Kansas:Louisiana:Minnesota:Mississippi:Missouri:Nebraska:Oklahoma:Tennessee:Texas:Wisconsin:Alabama</value>
+        <value>Illinois:Kansas:Louisiana:Minnesota:Mississippi:Missouri</value>
     </labels>
     <labels>
         <fullName>States_In_GMT_Minus_7</fullName>
