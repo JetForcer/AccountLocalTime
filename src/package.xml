@@ -34,6 +34,7 @@
     </types>
     <types>
         <members>settings</members>
+        <members>us_flag</members>
         <name>StaticResource</name>
     </types>
     <version>46.0</version>
