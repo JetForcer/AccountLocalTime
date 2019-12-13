@@ -1,5 +1,7 @@
 public class BillingTimeUtil {
 
+	private static final String API_KEY = 'GUBU1G0FJT8O';
+
 	@TestVisible
 	public static Opportunity fetchAndInsertData(Opportunity opp) {
 		if (opp.Use_Geolocation__c) {
@@ -44,11 +46,11 @@ public class BillingTimeUtil {
 			return;
 		}
 
-		acc.GMT_Offset__c = Integer.valueOf(gmtOffset);
+		acc.GMT_Offset__c = Integer.valueOf(gmtOffset) / 3600;
 	}
 
 	public static void insertTimeZoneNameIfPossible(Dom.Document doc, Account acc) {
-		String timeZoneId = getChildText(doc, 'timezoneId');
+		String timeZoneId = getChildText(doc, 'zoneName');
 		if (timeZoneId == null) {
 			System.debug('Time zone id does not parsed');
 			return;
@@ -80,14 +82,12 @@ public class BillingTimeUtil {
 
 	private static String getChildText(Dom.Document result, String childName) {
 		for (Dom.XmlNode node : result.getRootElement().getChildElements()) {
-			for (Dom.XmlNode childNode : node.getChildElements()) {
-				String name = childNode.getName();
+			String name = node.getName();
 				if (!childName.equals(name)) {
 					continue;
 				}
 
-				return childNode.getText();
-			}
+			return node.getText();
 		}
 
 		return null;
@@ -98,12 +98,13 @@ public class BillingTimeUtil {
 	}
 
 	private static Dom.Document fetchGeolocation(Account acc) {
+		// callout to the API that will correctly return a 401 error code when the session has expired,
+		//so 'Timezonedb' Named Credential will refresh the OAuth access_token
 		String restUrl
-				= 'http://api.geonames.org/timezone?lat='
+				= 'callout:Timezonedb?key=' + API_KEY + '&format=xml&by=position&lat='
 				+ acc.BillingLatitude
 				+ '&lng='
-				+ acc.BillingLongitude
-				+ '&username=jetforcer';
+				+ acc.BillingLongitude;
 
 		Http h = new Http();
 		HttpRequest req = new HttpRequest();
