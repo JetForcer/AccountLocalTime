@@ -15,18 +15,6 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>Timezonedb</members>
-        <name>AuthProvider</name>
-    </types>
-    <types>
-        <members>DataCloudGeoLocation</members>
-        <name>CleanDataService</name>
-    </types>
-    <types>
-        <members>Timezonedb</members>
-        <name>ConnectedApp</name>
-    </types>
-    <types>
         <members>CustomLabels</members>
         <name>CustomLabels</name>
     </types>
@@ -34,10 +22,6 @@
         <members>Account</members>
         <members>Opportunity</members>
         <name>CustomObject</name>
-    </types>
-    <types>
-        <members>Timezonedb</members>
-        <name>NamedCredential</name>
     </types>
     <types>
         <members>*</members>
