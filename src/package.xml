@@ -15,6 +15,18 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
+        <members>Timezonedb</members>
+        <name>AuthProvider</name>
+    </types>
+    <types>
+        <members>DataCloudGeoLocation</members>
+        <name>CleanDataService</name>
+    </types>
+    <types>
+        <members>Timezonedb</members>
+        <name>ConnectedApp</name>
+    </types>
+    <types>
         <members>CustomLabels</members>
         <name>CustomLabels</name>
     </types>
@@ -24,6 +36,10 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Timezonedb</members>
+        <name>NamedCredential</name>
+    </types>
+    <types>
         <members>*</members>
         <name>Profile</name>
     </types>
@@ -31,6 +47,10 @@
         <members>Opportunity.Customize_Local_Time_Classic</members>
         <members>Opportunity.Customize_Local_Time_Lightning</members>
         <name>QuickAction</name>
+    </types>
+    <types>
+        <members>timezonedb</members>
+        <name>RemoteSiteSetting</name>
     </types>
     <types>
         <members>settings</members>
