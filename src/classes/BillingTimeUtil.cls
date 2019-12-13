@@ -23,6 +23,10 @@ public class BillingTimeUtil {
 		}
 
 		Dom.Document result = fetchGeolocation(acc);
+		if (result.getRootElement() == null) {
+			return;
+		}
+
 		insertGmtOffsetIfPossible(result, acc);
 		insertTimeZoneNameIfPossible(result, acc);
 		insertCountryCodeIfPossible(result, acc);
@@ -81,7 +85,12 @@ public class BillingTimeUtil {
 	}
 
 	private static String getChildText(Dom.Document result, String childName) {
-		for (Dom.XmlNode node : result.getRootElement().getChildElements()) {
+		Dom.XmlNode root = result.getRootElement();
+		if (root == null) {
+			return null;
+		}
+
+		for (Dom.XmlNode node : root.getChildElements()) {
 			String name = node.getName();
 				if (!childName.equals(name)) {
 					continue;
@@ -113,6 +122,14 @@ public class BillingTimeUtil {
 		req.setHeader('Content-Type', 'charset=UTF-8');
 		HttpResponse res = h.send(req);
 
-		return res.getBodyDocument();
+		try{
+			return res.getBodyDocument();
+		}
+		catch (XmlException e) {
+			System.debug('Xml error has occurred: ' + e.getMessage());
+		}
+
+		//empty by default
+		return new Dom.Document();
 	}
 }
