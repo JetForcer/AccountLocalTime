@@ -4,8 +4,9 @@ public class BillingTimeUtil {
 
 	@TestVisible
 	public static Opportunity fetchAndInsertData(Opportunity opp) {
-		if (opp.Use_Geolocation__c) {
-			Account acc = getAccount(opp.AccountId);
+		Id accountId = opp.AccountId;
+		if (opp.Use_Geolocation__c && accountId != null) {
+			Account acc = getAccount(accountId);
 			fetchAndInsertData(acc.Id);
 		}
 		return opp;
