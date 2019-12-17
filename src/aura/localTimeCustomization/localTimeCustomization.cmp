@@ -5,7 +5,6 @@
     <aura:attribute name="opportunityRecord" type="Opportunity"/>
     <aura:attribute name="useGeolocation" type="Boolean"/>
     <aura:attribute name="use12HoursFormat" type="Boolean"/>
-    <!--  TODO: add error handler  -->
     <aura:attribute name="recordLoadError" type="String"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
