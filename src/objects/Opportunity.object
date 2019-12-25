@@ -150,6 +150,19 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Account_Local_Time_Setting__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity Local Time Setting</label>
+        <referenceTo>Opportunity_Local_Time_Setting__c</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Account_local_time__c</fullName>
         <externalId>false</externalId>
         <formula>Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;, Account.BillingCity, Account.BillingState) &amp; &quot;, &quot; &amp; Country__c &amp; &quot; - &quot; &amp; Time__c &amp; &quot; &quot; &amp; Clock_Format__c &amp; IF(Use_Geolocation__c, &quot; (&quot; &amp; Region_Time__c &amp; &quot;)&quot;, &quot;&quot;)</formula>

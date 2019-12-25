@@ -2,14 +2,13 @@ public class BillingTimeUtil {
 
 	private static final String API_KEY = 'GUBU1G0FJT8O';
 
-	@TestVisible
-	public static Opportunity fetchAndInsertData(Opportunity opp) {
+	public static void fetchAndInsertData(Opportunity opp) {
 		Id accountId = opp.AccountId;
-		if (opp.Use_Geolocation__c && accountId != null) {
+		Opportunity_Local_Time_Setting__c setting = getSetting(opp.Account_Local_Time_Setting__c);
+		if (setting != null && setting.Use_Geolocation__c && accountId != null) {
 			Account acc = getAccount(accountId);
 			fetchAndInsertData(acc.Id);
 		}
-		return opp;
 	}
 
 	/*
@@ -105,6 +104,13 @@ public class BillingTimeUtil {
 
 	private static Account getAccount(Id accountId) {
 		return [SELECT Id, BillingLatitude, BillingLongitude FROM Account WHERE Id = : accountId LIMIT 1];
+	}
+
+	public static Opportunity_Local_Time_Setting__c getSetting(Id settingId) {
+		return [SELECT Use_12_Hour_Format__c, Use_Geolocation__c
+		FROM Opportunity_Local_Time_Setting__c
+		WHERE Id =: settingId
+		LIMIT 1];
 	}
 
 	private static Dom.Document fetchGeolocation(Account acc) {
