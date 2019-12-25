@@ -165,7 +165,7 @@
     <fields>
         <fullName>Account_local_time__c</fullName>
         <externalId>false</externalId>
-        <formula>Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;, Account.BillingCity, Account.BillingState) &amp; &quot;, &quot; &amp; Country__c &amp; &quot; - &quot; &amp; Time__c &amp; &quot; &quot; &amp; Clock_Format__c &amp; IF(Use_Geolocation__c, &quot; (&quot; &amp; Region_Time__c &amp; &quot;)&quot;, &quot;&quot;)</formula>
+        <formula>Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;, Account.BillingCity, Account.BillingState) &amp; &quot;, &quot; &amp; Country__c &amp; &quot; - &quot; &amp; Time__c &amp; &quot; &quot; &amp; Clock_Format__c &amp; IF(Account_Local_Time_Setting__r.Use_Geolocation__c, &quot; (&quot; &amp; Region_Time__c &amp; &quot;)&quot;, &quot;&quot;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Account local time</label>
         <required>false</required>
@@ -181,7 +181,7 @@
     <fields>
         <fullName>Billing_Hours__c</fullName>
         <externalId>false</externalId>
-        <formula>TEXT(IF(Use_12_Hour_Format__c, Hours_12_format__c, Hour__c + Offset__c))</formula>
+        <formula>TEXT(IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, Hours_12_format__c, Hour__c + Offset__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Billing Hours</label>
         <required>false</required>
@@ -209,7 +209,7 @@
     <fields>
         <fullName>Clock_Format__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Use_12_Hour_Format__c, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;), &quot;&quot;)</formula>
+        <formula>IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;), &quot;&quot;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Clock Format</label>
         <required>false</required>
@@ -231,7 +231,7 @@
     <fields>
         <fullName>Country_Icon__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IF(CONTAINS(&quot;US:United States&quot;, Account.BillingCountry), IMAGE(&quot;https://bit.ly/36AxzzB&quot;, &quot;US&quot;, 13, 16), &quot;&quot;))</formula>
+        <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IF(CONTAINS(&quot;US:United States&quot;, Account.BillingCountry), IMAGE(&quot;https://bit.ly/36AxzzB&quot;, &quot;US&quot;, 13, 16), &quot;&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Country Icon</label>
         <required>false</required>
@@ -242,7 +242,7 @@
     <fields>
         <fullName>Country__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Use_Geolocation__c, Account.Country_Code__c, Account.BillingCountry)</formula>
+        <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, Account.Country_Code__c, Account.BillingCountry)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Country</label>
         <required>false</required>
@@ -377,7 +377,7 @@
     <fields>
         <fullName>Offset__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Use_Geolocation__c, Account.GMT_Offset__c, Account.USA_Offset__c)</formula>
+        <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, Account.GMT_Offset__c, Account.USA_Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Offset</label>
         <precision>18</precision>
