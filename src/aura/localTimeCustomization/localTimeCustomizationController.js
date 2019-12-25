@@ -37,6 +37,8 @@
     handleSuccess: function(component) {
         component.set('v.showSpinner', false);
 
+        $A.get("e.force:refreshView").fire();
+
         let toastEvent = $A.get("e.force:showToast");
         toastEvent.setParams({
             "title": "The customization Saved!",
