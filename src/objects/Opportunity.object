@@ -455,24 +455,6 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
-    <fields>
-        <fullName>Use_12_Hour_Format__c</fullName>
-        <defaultValue>true</defaultValue>
-        <externalId>false</externalId>
-        <label>Use 12 Hour Format</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>Use_Geolocation__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Use Geolocation</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
     <listViews>
         <fullName>AllOpportunities</fullName>
         <filterScope>Everything</filterScope>
