@@ -1,8 +1,40 @@
 public class LocalTimeCustomizationController {
 
 	@AuraEnabled
-	public static Opportunity_Local_Time_Setting__c getOrCreateSetting(Id opportunityId) {
-		Opportunity opp = getOpportunity(opportunityId);
+	public static sObject getOrCreateSetting(Id objectId) {
+		ObjectManager manager = ObjectManager.getInstance();
+
+		sObject obj = manager.getOpportunity(objectId);
+		if (obj != null) {
+			return getOrCreateOpportunitySetting((Opportunity)obj, manager);
+		}
+
+		obj = manager.getLead(objectId);
+		if (obj != null) {
+			return getOrCreateLeadSetting((Lead)obj, manager);
+		}
+
+		return null;
+	}
+
+	private static Lead_Local_Time_Setting__c getOrCreateLeadSetting(Lead leadVar, ObjectManager manager) {
+		Id settingId = leadVar.Lead_Local_Time_Setting__c;
+		if (settingId == null) {
+			Lead_Local_Time_Setting__c created = new Lead_Local_Time_Setting__c();
+			insert created;
+
+			leadVar.Lead_Local_Time_Setting__c = created.Id;
+			update leadVar;
+
+			return created;
+		}
+
+		return manager.getLeadSetting(settingId);
+	}
+
+	@AuraEnabled
+	public static Opportunity_Local_Time_Setting__c getOrCreateOpportunitySetting(Opportunity opp,
+																				  ObjectManager manager) {
 		Id settingId = opp.Account_Local_Time_Setting__c;
 		if (settingId == null) {
 			Opportunity_Local_Time_Setting__c created = new Opportunity_Local_Time_Setting__c();
@@ -14,18 +46,17 @@ public class LocalTimeCustomizationController {
 			return created;
 		}
 
-		return BillingTimeUtil.getSetting(settingId);
+		return manager.getOpportunitySetting(settingId);
 	}
 
 	@AuraEnabled
-	public static void fetchAndInsertGeoData(Id opportunityId) {
-		BillingTimeUtil.fetchAndInsertData(getOpportunity(opportunityId));
-	}
+	public static void fetchAndInsertGeoData(Id objectId) {
+		ObjectManager manager = ObjectManager.getInstance();
+		sObject obj = manager.getOpportunity(objectId);
+		if (obj == null) {
+			obj = manager.getLead(objectId);
+		}
 
-	private static Opportunity getOpportunity(Id opportunityId) {
-		return [SELECT Account_Local_Time_Setting__c, AccountId
-				FROM Opportunity
-				WHERE Id =: opportunityId
-				LIMIT 1];
+		TimeUtil.fetchAndInsertData(obj);
 	}
 }

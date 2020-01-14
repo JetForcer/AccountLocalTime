@@ -1,27 +1,36 @@
-<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"
-                controller="LocalTimeCustomizationController">
+<aura:component controller="LocalTimeCustomizationController">
 
-    <aura:attribute name="settingRecord" type="Opportunity_Local_Time_Setting__c"/>
+    <aura:attribute name="objectRecordId" type="Id"/>
+    <aura:attribute name="settingRecordId" type="Id"/>
+
+    <aura:attribute name="objectApiName" type="String"/>
+    <aura:attribute name="settingObjectApiName" type="String" default="sObject"/>
+    <aura:attribute name="fieldName" type="String"/>
+
     <aura:attribute name="disabled" type="Boolean" default="false"/>
     <aura:attribute name="showSpinner" type="Boolean" default="true"/>
 
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:method name="doInit" action="{!c.doInit}">
+        <aura:attribute name="recordId" type="Id"/>
+        <aura:attribute name="objectApiName" type="String"/>
+        <aura:attribute name="settingObjectApiName" type="String"/>
+        <aura:attribute name="fieldName" type="String"/>
+    </aura:method>
 
     <aura:if isTrue="{!v.showSpinner}">
         <lightning:spinner variant="brand" size="large"/>
     </aura:if>
     <aura:if isTrue="{!(!v.showSpinner)}">
-        <!-- Display a header with details about the Opportunity -->
         <div class="slds-page-header" role="banner">
             <lightning:recordViewForm recordId="{!v.recordId}"
-                                      objectApiName="Opportunity">
+                                      objectApiName="{!v.objectApiName}">
 
                 <div class="slds-text-heading_label">
                     <lightning:outputField fieldName="Name" variant="label-hidden"/>
                 </div>
                 <lightning:messages/>
                 <h1 class="slds-page-header__title slds-m-right_small
-                      slds-truncate slds-align-left">Customize Account local time</h1>
+                      slds-truncate slds-align-left">Customize {!v.fieldName}</h1>
             </lightning:recordViewForm>
         </div>
     </aura:if>
@@ -30,8 +39,8 @@
             onload="{!c.handleLoad}"
             onsubmit="{!c.handleSubmit}"
             onsuccess="{!c.handleSuccess}"
-            recordId="{!v.settingRecord.Id}"
-            objectApiName="Opportunity_Local_Time_Setting__c">
+            recordId="{!v.settingRecordId}"
+            objectApiName="{!v.settingObjectApiName}">
 
         <lightning:inputField fieldName="Use_Geolocation__c"/>
         <lightning:inputField fieldName="Use_12_Hour_Format__c"/>
@@ -48,4 +57,5 @@
             </div>
         </aura:if>
     </lightning:recordEditForm>
+
 </aura:component>

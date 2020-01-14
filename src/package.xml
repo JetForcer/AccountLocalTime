@@ -20,6 +20,8 @@
     </types>
     <types>
         <members>Account</members>
+        <members>Lead</members>
+        <members>Lead_Local_Time_Setting__c</members>
         <members>Opportunity</members>
         <members>Opportunity_Local_Time_Setting__c</members>
         <name>CustomObject</name>
@@ -29,6 +31,7 @@
         <name>Profile</name>
     </types>
     <types>
+        <members>Lead.Customize_Local_Time_Lightning</members>
         <members>Opportunity.Customize_Local_Time_Classic</members>
         <members>Opportunity.Customize_Local_Time_Lightning</members>
         <name>QuickAction</name>
