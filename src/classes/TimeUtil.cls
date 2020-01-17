@@ -1,7 +1,7 @@
 public class TimeUtil {
 
 	public static void fetchAndInsertData(sObject obj) {
-		if (!isContainLatitudeAndLongitude(obj)) {
+		if (getLatitude(obj) == null || getLongitude(obj) == null) {
 			return;
 		}
 
@@ -47,16 +47,44 @@ public class TimeUtil {
 		update leadVar;
 	}
 
-	public static Boolean isContainLatitudeAndLongitude(SObject obj) {
-		if (obj instanceof Account) {
-			Account acc = (Account)obj;
-			return acc.BillingLatitude != null && acc.BillingLongitude != null;
+	public static Boolean isGeocodesChanged(List<sObject> oldObjects, List<sObject> newObjects) {
+		if (oldObjects == null) {
+			return false;
 		}
-		else if (obj instanceof Lead) {
-			Lead leadVar = (Lead)obj;
-			return leadVar.Latitude != null && leadVar.Longitude != null;
+
+		Iterator<SObject> oldObjectsIterator = oldObjects.iterator();
+		Iterator<SObject> newObjectsIterator = newObjects.iterator();
+
+		while (oldObjectsIterator.hasNext() && newObjectsIterator.hasNext()) {
+			sObject oldObject = oldObjectsIterator.next();
+			SObject newObject = newObjectsIterator.next();
+
+			if (getLatitude(oldObject) != getLatitude(newObject)
+					|| getLongitude(oldObject) != getLongitude(newObject)) {
+				return true;
+			}
 		}
 
 		return false;
+	}
+
+	private static Decimal getLatitude(sObject obj) {
+		if (obj instanceof Account) {
+			return ((Account)obj).BillingLatitude;
+		} else if (obj instanceof Lead) {
+			return ((Lead)obj).Latitude;
+		}
+
+		return null;
+	}
+
+	private static Decimal getLongitude(sObject obj) {
+		if (obj instanceof Account) {
+			return ((Account)obj).BillingLongitude;
+		} else if (obj instanceof Lead) {
+			return ((Lead)obj).Longitude;
+		}
+
+		return null;
 	}
 }
