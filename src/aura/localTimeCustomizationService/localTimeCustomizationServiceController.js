@@ -53,8 +53,6 @@
     },
 
     handleSuccess: function(component) {
-        cmp.set("v.showSpinner", false);
-
         let fieldName = component.get('v.fieldName');
         let toastEvent = $A.get("e.force:showToast");
         toastEvent.setParams({
