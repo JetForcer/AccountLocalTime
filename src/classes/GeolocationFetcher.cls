@@ -27,6 +27,7 @@ public class GeolocationFetcher {
 		req.setEndpoint(restUrl);
 		req.setMethod('POST');
 		req.setHeader('Content-Type', 'charset=UTF-8');
+		req.setTimeout(120000);
 		HttpResponse res = h.send(req);
 
 		try {
