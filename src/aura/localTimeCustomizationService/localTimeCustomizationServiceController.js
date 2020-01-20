@@ -14,13 +14,13 @@
         saveSetting.setParams({"objectId": params.recordId});
         saveSetting.setCallback(self, function(a) {
             let settingRecord = a.getReturnValue();
-            component.set('v.settingRecordId', settingRecord.Id)
+            component.set('v.settingRecordId', settingRecord.Id);
+            component.set('v.showSpinner', false);
         });
         $A.enqueueAction(saveSetting);
     },
 
     handleLoad: function(component) {
-        component.set('v.showSpinner', false);
     },
 
     handleSubmit: function(component) {
@@ -33,6 +33,16 @@
             let state = response.getState();
             if (state === 'SUCCESS') {
                 $A.get("e.force:refreshView").fire();
+
+                let fieldName = component.get('v.fieldName');
+                let toastEvent = $A.get("e.force:showToast");
+                toastEvent.setParams({
+                        "title": "The customization Saved!",
+                        "message": "The " + fieldName + " customization has been Saved successfully."
+                });
+                toastEvent.fire();
+
+                $A.get("e.force:closeQuickAction").fire();
             }
         });
         fetchAndInsert.setParams({"objectId": component.get("v.objectRecordId")});
@@ -53,15 +63,7 @@
     },
 
     handleSuccess: function(component) {
-        let fieldName = component.get('v.fieldName');
-        let toastEvent = $A.get("e.force:showToast");
-        toastEvent.setParams({
-            "title": "The customization Saved!",
-            "message": "The " + fieldName + " customization has been Saved successfully."
-        });
-        toastEvent.fire();
 
-        $A.get("e.force:closeQuickAction").fire();
     },
 
     handleCancel: function (component) {

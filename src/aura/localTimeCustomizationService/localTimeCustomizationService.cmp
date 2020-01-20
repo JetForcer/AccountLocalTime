@@ -18,7 +18,7 @@
     </aura:method>
 
     <aura:if isTrue="{!v.showSpinner}">
-        <lightning:spinner variant="brand" size="large"/>
+        <lightning:spinner alternativeText="Loading" variant="brand" size="large"/>
     </aura:if>
     <aura:if isTrue="{!(!v.showSpinner)}">
         <div class="slds-page-header" role="banner">
@@ -33,29 +33,26 @@
                       slds-truncate slds-align-left">Customize {!v.fieldName}</h1>
             </lightning:recordViewForm>
         </div>
+
+        <lightning:recordEditForm
+                onload="{!c.handleLoad}"
+                onsubmit="{!c.handleSubmit}"
+                onsuccess="{!c.handleSuccess}"
+                recordId="{!v.settingRecordId}"
+                objectApiName="{!v.settingObjectApiName}">
+
+            <lightning:inputField fieldName="Use_Geolocation__c"/>
+            <lightning:inputField fieldName="Use_12_Hour_Format__c"/>
+                <div class="slds-m-top_medium">
+                    <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
+                    <lightning:button disabled="{!v.disabled}"
+                                      variant="brand"
+                                      type="submit"
+                                      name="save"
+                                      iconName="utility:save"
+                                      accesskey="s"
+                                      label="Save"/>
+                </div>
+        </lightning:recordEditForm>
     </aura:if>
-
-    <lightning:recordEditForm
-            onload="{!c.handleLoad}"
-            onsubmit="{!c.handleSubmit}"
-            onsuccess="{!c.handleSuccess}"
-            recordId="{!v.settingRecordId}"
-            objectApiName="{!v.settingObjectApiName}">
-
-        <lightning:inputField fieldName="Use_Geolocation__c"/>
-        <lightning:inputField fieldName="Use_12_Hour_Format__c"/>
-        <aura:if isTrue="{!(!v.showSpinner)}">
-            <div class="slds-m-top_medium">
-                <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
-                <lightning:button disabled="{!v.disabled}"
-                                  variant="brand"
-                                  type="submit"
-                                  name="save"
-                                  iconName="utility:save"
-                                  accesskey="s"
-                                  label="Save"/>
-            </div>
-        </aura:if>
-    </lightning:recordEditForm>
-
 </aura:component>

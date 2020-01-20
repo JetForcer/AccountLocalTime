@@ -1,8 +1,8 @@
 public class TimeUtil {
 
-	public static void fetchAndInsertData(sObject obj) {
+	public static sObject fetchAndInsertData(sObject obj) {
 		if (getLatitude(obj) == null || getLongitude(obj) == null) {
-			return;
+			return null;
 		}
 
 		ObjectManager manager = ObjectManager.getInstance();
@@ -15,36 +15,34 @@ public class TimeUtil {
 
 			if (setting != null && setting.Use_Geolocation__c && accountId != null) {
 				Account acc = manager.getAccount(accountId);
-				fetchAndInsertAccountData(acc.Id);
+				return fetchAndInsertAccountData(acc.Id);
 			}
 		} else if (obj instanceof Lead) {
 			Lead leadVar = (Lead)obj;
 			Lead_Local_Time_Setting__c setting = manager.getLeadSetting(leadVar.Lead_Local_Time_Setting__c);
 
 			if (setting != null && setting.Use_Geolocation__c) {
-				fetchAndInsertLeadData(leadVar.Id);
+				return fetchAndInsertLeadData(leadVar.Id);
 			}
 		}
+
+		return null;
 	}
 
-	/*
-	 * The reason why sObjects can’t be passed as arguments to future methods is because the sObject might change
-	 * between the time you call the method, and the time it executes.
-	 */
-	@future(callout = true)
-	public static void fetchAndInsertAccountData(Id accountId) {
+	public static Account fetchAndInsertAccountData(Id accountId) {
 		Account acc = ObjectManager.getInstance().getAccount(accountId);
 		Dom.Document result = GeolocationFetcher.fetch(acc);
 		DataWriter.write(result, acc);
 		update acc;
+		return acc;
 	}
 
-	@future(callout = true)
-	public static void fetchAndInsertLeadData(Id leadId) {
+	public static Lead fetchAndInsertLeadData(Id leadId) {
 		Lead leadVar = ObjectManager.getInstance().getLead(leadId);
 		Dom.Document result = GeolocationFetcher.fetch(leadVar);
 		DataWriter.write(result, leadVar);
 		update leadVar;
+		return leadVar;
 	}
 
 	public static Boolean isGeocodesChanged(List<sObject> oldObjects, List<sObject> newObjects) {

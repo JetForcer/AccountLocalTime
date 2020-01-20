@@ -49,13 +49,13 @@ public class LocalTimeCustomizationController {
 	}
 
 	@AuraEnabled
-	public static void fetchAndInsertGeoData(Id objectId) {
+	public static sObject fetchAndInsertGeoData(Id objectId) {
 		ObjectManager manager = ObjectManager.getInstance();
 		sObject obj = manager.getOpportunity(objectId);
 		if (obj == null) {
 			obj = manager.getLead(objectId);
 		}
 
-		TimeUtil.fetchAndInsertData(obj);
+		return TimeUtil.fetchAndInsertData(obj);
 	}
 }
