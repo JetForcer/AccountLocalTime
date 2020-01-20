@@ -32,8 +32,7 @@ public class LocalTimeCustomizationController {
 		return manager.getLeadSetting(settingId);
 	}
 
-	@AuraEnabled
-	public static Opportunity_Local_Time_Setting__c getOrCreateOpportunitySetting(Opportunity opp,
+	private static Opportunity_Local_Time_Setting__c getOrCreateOpportunitySetting(Opportunity opp,
 																				  ObjectManager manager) {
 		Id settingId = opp.Account_Local_Time_Setting__c;
 		if (settingId == null) {
