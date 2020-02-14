@@ -1,10 +1,6 @@
 public class TimeUtil {
 
 	public static sObject fetchAndInsertData(sObject obj) {
-		if (getLatitude(obj) == null || getLongitude(obj) == null) {
-			return null;
-		}
-
 		ObjectManager manager = ObjectManager.getInstance();
 
 		if (obj instanceof Opportunity) {
@@ -15,10 +11,18 @@ public class TimeUtil {
 
 			if (setting != null && setting.Use_Geolocation__c && accountId != null) {
 				Account acc = manager.getAccount(accountId);
+				if (getLatitude(acc) == null || getLongitude(acc) == null) {
+					return null;
+				}
+
 				return fetchAndInsertAccountData(acc.Id);
 			}
 		} else if (obj instanceof Lead) {
 			Lead leadVar = (Lead)obj;
+			if (getLatitude(leadVar) == null || getLongitude(leadVar) == null) {
+				return null;
+			}
+
 			Lead_Local_Time_Setting__c setting = manager.getLeadSetting(leadVar.Lead_Local_Time_Setting__c);
 
 			if (setting != null && setting.Use_Geolocation__c) {

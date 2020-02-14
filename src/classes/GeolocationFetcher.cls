@@ -21,14 +21,24 @@ public class GeolocationFetcher {
 
 	private static Dom.Document sendRequestAndGetDocument(String restUrl) {
 		Dom.Document result = null;
+		HttpCalloutMock mock = new HttpCalloutMockImpl();
 
-		Http h = new Http();
 		HttpRequest req = new HttpRequest();
 		req.setEndpoint(restUrl);
 		req.setMethod('POST');
 		req.setHeader('Content-Type', 'charset=UTF-8');
 		req.setTimeout(120000);
-		HttpResponse res = h.send(req);
+
+		HttpResponse res = null;
+
+
+		if (Test.isRunningTest()) {
+			res = mock.respond(req);
+		}
+		else {
+			Http h = new Http();
+			res = h.send(req);
+		}
 
 		try {
 			result = res.getBodyDocument();

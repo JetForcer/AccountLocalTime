@@ -4,6 +4,12 @@
         <members>BillingTimeUtil</members>
         <members>LocalTimeCustomizationController</members>
         <members>UpdateDstOffsetJob</members>
+        <members>DataWriterTest</members>
+        <members>GeolocationFetcherTest</members>
+        <members>HttpCalloutMockImpl</members>
+        <members>LocalTimeCustomizationControllerTest</members>
+        <members>TestUtil</members>
+        <members>UpdateDstOffsetJobTest</members>
         <name>ApexClass</name>
     </types>
     <types>

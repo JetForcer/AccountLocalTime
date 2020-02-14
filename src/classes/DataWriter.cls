@@ -65,6 +65,8 @@ public class DataWriter {
 			return;
 		}
 
+		words = words.trim();
+
 		if (obj instanceof Account) {
 			((Account)obj).Time_zone_display_name__c = words;
 		}
@@ -73,6 +75,7 @@ public class DataWriter {
 		}
 	}
 
+	@TestVisible
 	private static String getChildText(Dom.Document result, String childName) {
 		Dom.XmlNode root = result.getRootElement();
 		if (root == null) {
