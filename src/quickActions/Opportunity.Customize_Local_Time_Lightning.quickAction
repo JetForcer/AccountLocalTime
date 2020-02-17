@@ -3,7 +3,7 @@
     <height>300</height>
     <icon>settings</icon>
     <label>Customize local time</label>
-    <lightningComponent>localTimeCustomization</lightningComponent>
+    <lightningComponent>opportunityLocalTimeCustomization</lightningComponent>
     <optionsCreateFeedItem>false</optionsCreateFeedItem>
     <type>LightningComponent</type>
     <width>-100</width>
