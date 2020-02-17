@@ -5,7 +5,7 @@ public class GeolocationFetcher {
 	 * so 'Timezonedb' Named Credential will refresh the OAuth access_token
 	 */
 	private static final String TIMEZONEDB_URL
-			= 'callout:Timezonedb?key=GUBU1G0FJT8O&format=xml&by=position&lat={0}&lng={1}';
+			= 'https://api.timezonedb.com/v2.1/get-time-zone?key=GUBU1G0FJT8O&format=xml&by=position&lat={0}&lng={1}';
 
 	public static Dom.Document fetch(Account acc) {
 		return sendRequestAndGetDocument(formatUrl(acc.BillingLatitude, acc.BillingLongitude));
@@ -21,7 +21,7 @@ public class GeolocationFetcher {
 
 	private static Dom.Document sendRequestAndGetDocument(String restUrl) {
 		Dom.Document result = null;
-		HttpCalloutMock mock = new HttpCalloutMockImpl();
+		HttpCalloutMock mock = new localTimeJF.HttpCalloutMockImpl();
 
 		HttpRequest req = new HttpRequest();
 		req.setEndpoint(restUrl);

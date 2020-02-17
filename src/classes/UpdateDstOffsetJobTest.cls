@@ -5,16 +5,19 @@ private class UpdateDstOffsetJobTest {
     public static void testUpdateForAccount() {
         Test.startTest();
 
-        Account acc = TestUtil.createTestAccount();
+        Account acc = localTimeJF.TestUtil.createTestAccount();
         insert acc;
         List<Account> accounts = new List<Account>();
         accounts.add(acc);
 
-        UpdateDstOffsetJob job = new UpdateDstOffsetJob(accounts);
+        localTimeJF.UpdateDstOffsetJob job = new localTimeJF.UpdateDstOffsetJob(accounts);
         job.execute(null);
 
-        acc = [SELECT Country_Code__c, GMT_Offset__c, Time_zone_display_name__c FROM Account WHERE Id =: acc.Id];
-        TestUtil.checkFields(acc);
+        acc = [SELECT localTimeJF__Country_Code__c, localTimeJF__GMT_Offset__c, localTimeJF__Time_zone_display_name__c
+               FROM Account
+               WHERE Id =: acc.Id];
+
+        localTimeJF.TestUtil.checkFields(acc);
 
         Test.stopTest();
     }
@@ -23,7 +26,7 @@ private class UpdateDstOffsetJobTest {
     public static void testUpdateForLead() {
         Test.startTest();
 
-        Lead l = TestUtil.createTestLead();
+        Lead l = localTimeJF.TestUtil.createTestLead();
         l.Latitude = 50.460225;
         l.Longitude = 30.622090;
         insert l;
@@ -31,11 +34,14 @@ private class UpdateDstOffsetJobTest {
         List<Lead> leads = new List<Lead>();
         leads.add(l);
 
-        UpdateDstOffsetJob job = new UpdateDstOffsetJob(leads);
+        localTimeJF.UpdateDstOffsetJob job = new localTimeJF.UpdateDstOffsetJob(leads);
         job.execute(null);
 
-        l = [SELECT Country_Code__c, GMT_Offset__c, Time_zone_display_name__c FROM Lead WHERE Id =: l.Id];
-        TestUtil.checkFields(l);
+        l = [SELECT localTimeJF__Country_Code__c, localTimeJF__GMT_Offset__c, localTimeJF__Time_zone_display_name__c
+             FROM Lead
+             WHERE Id =: l.Id];
+
+        localTimeJF.TestUtil.checkFields(l);
 
         Test.stopTest();
     }

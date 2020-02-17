@@ -1,4 +1,4 @@
-<aura:component controller="LocalTimeCustomizationController">
+<aura:component controller="localTimeJF.LocalTimeCustomizationController">
 
     <aura:attribute name="objectRecordId" type="Id"/>
     <aura:attribute name="settingRecordId" type="Id"/>
@@ -41,8 +41,8 @@
                 recordId="{!v.settingRecordId}"
                 objectApiName="{!v.settingObjectApiName}">
 
-            <lightning:inputField fieldName="Use_Geolocation__c"/>
-            <lightning:inputField fieldName="Use_12_Hour_Format__c"/>
+            <lightning:inputField fieldName="localTimeJF__Use_Geolocation__c"/>
+            <lightning:inputField fieldName="localTimeJF__Use_12_Hour_Format__c"/>
                 <div class="slds-m-top_medium">
                     <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
                     <lightning:button disabled="{!v.disabled}"

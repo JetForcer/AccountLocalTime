@@ -13,10 +13,10 @@ public class DataWriter {
 		}
 
 		if (obj instanceof Account) {
-			((Account)obj).Country_Code__c = code;
+			((Account)obj).localTimeJF__Country_Code__c = code;
 		}
 		else if (obj instanceof Lead) {
-			((Lead)obj).Country_Code__c = code;
+			((Lead)obj).localTimeJF__Country_Code__c = code;
 		}
 	}
 
@@ -30,10 +30,10 @@ public class DataWriter {
 		Integer offset = Integer.valueOf(gmtOffset) / 3600;
 
 		if (obj instanceof Account) {
-			((Account)obj).GMT_Offset__c = offset;
+			((Account)obj).localTimeJF__GMT_Offset__c = offset;
 		}
 		else if (obj instanceof Lead) {
-			((Lead)obj).GMT_Offset__c = offset;
+			((Lead)obj).localTimeJF__GMT_Offset__c = offset;
 		}
 	}
 
@@ -68,10 +68,10 @@ public class DataWriter {
 		words = words.trim();
 
 		if (obj instanceof Account) {
-			((Account)obj).Time_zone_display_name__c = words;
+			((Account)obj).localTimeJF__Time_zone_display_name__c = words;
 		}
 		else if (obj instanceof Lead) {
-			((Lead)obj).Time_zone_display_name__c = words;
+			((Lead)obj).localTimeJF__Time_zone_display_name__c = words;
 		}
 	}
 

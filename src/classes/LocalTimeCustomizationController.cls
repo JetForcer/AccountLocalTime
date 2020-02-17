@@ -2,7 +2,7 @@ public class LocalTimeCustomizationController {
 
 	@AuraEnabled
 	public static sObject getOrCreateSetting(Id objectId) {
-		ObjectManager manager = ObjectManager.getInstance();
+		localTimeJF.ObjectManager manager = localTimeJF.ObjectManager.getInstance();
 
 		sObject obj = manager.getOpportunity(objectId);
 		if (obj != null) {
@@ -17,13 +17,14 @@ public class LocalTimeCustomizationController {
 		return null;
 	}
 
-	private static Lead_Local_Time_Setting__c getOrCreateLeadSetting(Lead leadVar, ObjectManager manager) {
-		Id settingId = leadVar.Lead_Local_Time_Setting__c;
+	private static localTimeJF__Lead_Local_Time_Setting__c getOrCreateLeadSetting(Lead leadVar,
+																				  localTimeJF.ObjectManager manager) {
+		Id settingId = leadVar.localTimeJF__Lead_Local_Time_Setting__c;
 		if (settingId == null) {
-			Lead_Local_Time_Setting__c created = new Lead_Local_Time_Setting__c();
+			localTimeJF__Lead_Local_Time_Setting__c created = new localTimeJF__Lead_Local_Time_Setting__c();
 			insert created;
 
-			leadVar.Lead_Local_Time_Setting__c = created.Id;
+			leadVar.localTimeJF__Lead_Local_Time_Setting__c = created.Id;
 			update leadVar;
 
 			return created;
@@ -32,14 +33,16 @@ public class LocalTimeCustomizationController {
 		return manager.getLeadSetting(settingId);
 	}
 
-	private static Opportunity_Local_Time_Setting__c getOrCreateOpportunitySetting(Opportunity opp,
-																				  ObjectManager manager) {
-		Id settingId = opp.Account_Local_Time_Setting__c;
+	private static localTimeJF__Opportunity_Local_Time_Setting__c getOrCreateOpportunitySetting(Opportunity opp,
+			localTimeJF.ObjectManager manager) {
+
+		Id settingId = opp.localTimeJF__Account_Local_Time_Setting__c;
 		if (settingId == null) {
-			Opportunity_Local_Time_Setting__c created = new Opportunity_Local_Time_Setting__c();
+			localTimeJF__Opportunity_Local_Time_Setting__c created
+					= new localTimeJF__Opportunity_Local_Time_Setting__c();
 			insert created;
 
-			opp.Account_Local_Time_Setting__c = created.Id;
+			opp.localTimeJF__Account_Local_Time_Setting__c = created.Id;
 			update opp;
 
 			return created;
@@ -50,12 +53,12 @@ public class LocalTimeCustomizationController {
 
 	@AuraEnabled
 	public static sObject fetchAndInsertGeoData(Id objectId) {
-		ObjectManager manager = ObjectManager.getInstance();
+		localTimeJF.ObjectManager manager = localTimeJF.ObjectManager.getInstance();
 		sObject obj = manager.getOpportunity(objectId);
 		if (obj == null) {
 			obj = manager.getLead(objectId);
 		}
 
-		return TimeUtil.fetchAndInsertData(obj);
+		return localTimeJF.TimeUtil.fetchAndInsertData(obj);
 	}
 }

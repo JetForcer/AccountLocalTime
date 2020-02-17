@@ -1,15 +1,15 @@
 public class TimeUtil {
 
 	public static sObject fetchAndInsertData(sObject obj) {
-		ObjectManager manager = ObjectManager.getInstance();
+		localTimeJF.ObjectManager manager = ObjectManager.getInstance();
 
 		if (obj instanceof Opportunity) {
 			Opportunity opp = (Opportunity)obj;
-			Id settingId = opp.Account_Local_Time_Setting__c;
-			Opportunity_Local_Time_Setting__c setting = manager.getOpportunitySetting(settingId);
+			Id settingId = opp.localTimeJF__Account_Local_Time_Setting__c;
+			localTimeJF__Opportunity_Local_Time_Setting__c setting = manager.getOpportunitySetting(settingId);
 			Id accountId = opp.AccountId;
 
-			if (setting != null && setting.Use_Geolocation__c && accountId != null) {
+			if (setting != null && setting.localTimeJF__Use_Geolocation__c && accountId != null) {
 				Account acc = manager.getAccount(accountId);
 				if (getLatitude(acc) == null || getLongitude(acc) == null) {
 					return null;
@@ -23,9 +23,10 @@ public class TimeUtil {
 				return null;
 			}
 
-			Lead_Local_Time_Setting__c setting = manager.getLeadSetting(leadVar.Lead_Local_Time_Setting__c);
+			localTimeJF__Lead_Local_Time_Setting__c setting
+					= manager.getLeadSetting(leadVar.localTimeJF__Lead_Local_Time_Setting__c);
 
-			if (setting != null && setting.Use_Geolocation__c) {
+			if (setting != null && setting.localTimeJF__Use_Geolocation__c) {
 				return fetchAndInsertLeadData(leadVar.Id);
 			}
 		}
@@ -34,17 +35,17 @@ public class TimeUtil {
 	}
 
 	public static Account fetchAndInsertAccountData(Id accountId) {
-		Account acc = ObjectManager.getInstance().getAccount(accountId);
-		Dom.Document result = GeolocationFetcher.fetch(acc);
-		DataWriter.write(result, acc);
+		Account acc = localTimeJF.ObjectManager.getInstance().getAccount(accountId);
+		Dom.Document result = localTimeJF.GeolocationFetcher.fetch(acc);
+		localTimeJF.DataWriter.write(result, acc);
 		update acc;
 		return acc;
 	}
 
 	public static Lead fetchAndInsertLeadData(Id leadId) {
-		Lead leadVar = ObjectManager.getInstance().getLead(leadId);
-		Dom.Document result = GeolocationFetcher.fetch(leadVar);
-		DataWriter.write(result, leadVar);
+		Lead leadVar = localTimeJF.ObjectManager.getInstance().getLead(leadId);
+		Dom.Document result = localTimeJF.GeolocationFetcher.fetch(leadVar);
+		localTimeJF.DataWriter.write(result, leadVar);
 		update leadVar;
 		return leadVar;
 	}

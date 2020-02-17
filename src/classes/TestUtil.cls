@@ -1,15 +1,15 @@
 public with sharing class TestUtil {
 
     public static void checkFields(Account acc) {
-        System.assertEquals('UA', acc.Country_Code__c);
-        System.assertEquals(2, acc.GMT_Offset__c);
-        System.assertEquals('Eastern European Standard Time', acc.Time_zone_display_name__c);
+        System.assertEquals('UA', acc.localTimeJF__Country_Code__c);
+        System.assertEquals(2, acc.localTimeJF__GMT_Offset__c);
+        System.assertEquals('Eastern European Standard Time', acc.localTimeJF__Time_zone_display_name__c);
     }
 
     public static void checkFields(Lead l) {
-        System.assertEquals('UA', l.Country_Code__c);
-        System.assertEquals(2, l.GMT_Offset__c);
-        System.assertEquals('Eastern European Standard Time', l.Time_zone_display_name__c);
+        System.assertEquals('UA', l.localTimeJF__Country_Code__c);
+        System.assertEquals(2, l.localTimeJF__GMT_Offset__c);
+        System.assertEquals('Eastern European Standard Time', l.localTimeJF__Time_zone_display_name__c);
     }
 
     public static Account createTestAccount() {

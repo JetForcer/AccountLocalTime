@@ -9,10 +9,10 @@ public class UpdateDstOffsetJob implements Database.AllowsCallouts, Queueable {
 	public void execute(System.QueueableContext context) {
 		for (sObject obj : scope) {
 			if (obj instanceof Account) {
-				TimeUtil.fetchAndInsertAccountData(obj.Id);
+				localTimeJF.TimeUtil.fetchAndInsertAccountData(obj.Id);
 			}
 			else if (obj instanceof Lead) {
-				TimeUtil.fetchAndInsertLeadData(obj.Id);
+				localTimeJF.TimeUtil.fetchAndInsertLeadData(obj.Id);
 			}
 		}
 	}

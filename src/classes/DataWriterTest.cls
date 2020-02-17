@@ -5,8 +5,8 @@ public with sharing class DataWriterTest {
     public static void testWriteForAccount() {
         Test.startTest();
         Account acc = new Account();
-        Dom.Document doc = GeolocationFetcher.fetch(acc);
-        DataWriter.write(doc, acc);
+        Dom.Document doc = localTimeJF.GeolocationFetcher.fetch(acc);
+        localTimeJF.DataWriter.write(doc, acc);
 
         TestUtil.checkFields(acc);
         Test.stopTest();
@@ -16,10 +16,10 @@ public with sharing class DataWriterTest {
     public static void testWriteForLead() {
         Test.startTest();
         Lead l = new Lead();
-        Dom.Document doc = GeolocationFetcher.fetch(l);
-        DataWriter.write(doc, l);
+        Dom.Document doc = localTimeJF.GeolocationFetcher.fetch(l);
+        localTimeJF.DataWriter.write(doc, l);
 
-        TestUtil.checkFields(l);
+        localTimeJF.TestUtil.checkFields(l);
         Test.stopTest();
     }
 }

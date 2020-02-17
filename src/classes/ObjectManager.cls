@@ -11,7 +11,7 @@ public class ObjectManager {
 	}
 
 	public Opportunity getOpportunity(Id opportunityId) {
-		List<Opportunity> opportunities = [SELECT Account_Local_Time_Setting__c, AccountId
+		List<Opportunity> opportunities = [SELECT localTimeJF__Account_Local_Time_Setting__c, AccountId
 										   FROM Opportunity
 										   WHERE Id =: opportunityId
 										   LIMIT 1];
@@ -23,7 +23,7 @@ public class ObjectManager {
 	}
 
 	public Lead getLead(Id leadId) {
-		List<Lead> leads = [SELECT Lead_Local_Time_Setting__c, Latitude, Longitude
+		List<Lead> leads = [SELECT localTimeJF__Lead_Local_Time_Setting__c, Latitude, Longitude
 							FROM Lead
 							WHERE Id =: leadId
 							LIMIT 1];
@@ -35,15 +35,15 @@ public class ObjectManager {
 	}
 
 	public Opportunity_Local_Time_Setting__c getOpportunitySetting(Id settingId) {
-		return [SELECT Use_12_Hour_Format__c, Use_Geolocation__c
-				FROM Opportunity_Local_Time_Setting__c
+		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
+				FROM localTimeJF__Opportunity_Local_Time_Setting__c
 				WHERE Id =: settingId
 				LIMIT 1];
 	}
 
 	public Lead_Local_Time_Setting__c getLeadSetting(Id settingId) {
-		return [SELECT Use_12_Hour_Format__c, Use_Geolocation__c
-				FROM Lead_Local_Time_Setting__c
+		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
+				FROM localTimeJF__Lead_Local_Time_Setting__c
 				WHERE Id =: settingId
 				LIMIT 1];
 	}
