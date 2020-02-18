@@ -1,9 +1,5 @@
 public class GeolocationFetcher {
 
-	/*
-	 * Callout to the API that will correctly return a 401 error code when the session has expired,
-	 * so 'Timezonedb' Named Credential will refresh the OAuth access_token
-	 */
 	private static final String TIMEZONEDB_URL
 			= 'https://api.timezonedb.com/v2.1/get-time-zone?key=GUBU1G0FJT8O&format=xml&by=position&lat={0}&lng={1}';
 
