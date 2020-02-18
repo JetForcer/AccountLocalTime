@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Time - Post Install Instructions</title>
+</head>
+<body>
+<h1>Local Time - Post Install Instructions</h1>
+<h2>1. Move custom components to layouts</h2>
+<p>You may customize your layouts as you want, to do it, please follow steps as described below:</p>
+<h3>Opportunity:</h3>
+<ul>
+    <li>Go to Setup -> Build -> Customize -> Opportunities -> Page Layouts -> Opportunity Layout -> Edit</li>
+    <li>On the top of the page</li>
+    <ul>
+        <li>Select 'Fields', and then drag the 'Account Local Time' to "Opportunity Detail" place</li>
+        <li>Select 'Mobile & Lightning Actions', and then drag the 'Customize local time' to "Salesforce Mobile and Lightning Experience Actions" place</li>
+    </ul>
+</ul>
+<h3>Lead:</h3>
+<ul>
+    <li>Go to Setup -> Build -> Customize -> Leads -> Page Layouts -> Lead Layout -> Edit</li>
+    <li>On the top of the page</li>
+    <ul>
+        <li>Select 'Fields', and then drag the 'Local Time' to "Lead Detail" place</li>
+        <li>Select 'Mobile & Lightning Actions', and then drag the 'Customize local time' to "Salesforce Mobile and Lightning Experience Actions" place</li>
+    </ul>
+</ul>
+<h2>2. Configure My Domain</h2>
+<p>Without it Lightning customization form will not work</p>
+<ul><li>Go to Setup -> Administer -> Domain Management -> My Domain, and then follow the instruction from Salesforce</li></ul>
+<h3>3. Activate Geocodes for Addresses</h3>
+<p>To enable latitude and longitude object fields need to activate the Data Integration Rules</p>
+<ul>
+    <li>Setup -> Data Management -> Data Integration Rules</li>
+    <li>Open 'Geocodes for Account Billing Address' and click on 'Activate'</li>
+    <li>Open 'Geocodes for Lead Address' and click on 'Activate'</li>
+</ul>
+<b>See also:</b>
+<ul>
+    <a href="/usage-examples.html"><li>Usage examples</li></a>
+</ul>
+</body>
+</html>
