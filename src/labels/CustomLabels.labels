@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
-        <fullName>States_In_GMT_Minus_5</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Represents names of states</shortDescription>
-        <value>Connecticut:Florida:Georgia:Indiana:Kentucky:Massachusetts:Michigan:New Jersey:New York:Pennsylvania:Virginia:Washington</value>
-    </labels>
-    <labels>
         <fullName>States_In_GMT_Minus_6</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Represents names of states</shortDescription>
-        <value>Illinois:Kansas:Louisiana:Minnesota:Mississippi:Missouri</value>
+        <value>Illinois:Kansas:Louisiana:Minnesota:Mississippi</value>
     </labels>
     <labels>
         <fullName>States_In_GMT_Minus_7</fullName>
