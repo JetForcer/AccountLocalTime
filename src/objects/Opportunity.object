@@ -211,7 +211,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     <fields>
         <fullName>Clock_Format__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;), &quot;&quot;)</formula>
+        <formula>IF(NOT(ISBLANK(Account_Local_Time_Setting__c)) &amp;&amp; NOT(Account_Local_Time_Setting__r.Use_12_Hour_Format__c), &quot;&quot;, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Clock Format</label>
         <required>false</required>
@@ -233,7 +233,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     <fields>
         <fullName>Country_Icon__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IMAGE(&quot;https://bit.ly/36AxzzB&quot;, &quot;US&quot;, 13, 16))</formula>
+        <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IMAGE(&quot;/resource/1581936179000/localTimeJF__us_flag&quot;, &quot;US&quot;, 13, 16))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Country Icon</label>
         <required>false</required>
