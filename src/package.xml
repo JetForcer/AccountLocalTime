@@ -2,13 +2,13 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>BillingTimeUtil</members>
-        <members>LocalTimeCustomizationController</members>
-        <members>UpdateDstOffsetJob</members>
         <members>DataWriterTest</members>
         <members>GeolocationFetcherTest</members>
         <members>HttpCalloutMockImpl</members>
+        <members>LocalTimeCustomizationController</members>
         <members>LocalTimeCustomizationControllerTest</members>
         <members>TestUtil</members>
+        <members>UpdateDstOffsetJob</members>
         <members>UpdateDstOffsetJobTest</members>
         <name>ApexClass</name>
     </types>
@@ -26,6 +26,7 @@
     </types>
     <types>
         <members>Account</members>
+        <members>Account_Local_Time_Setting__c</members>
         <members>Lead</members>
         <members>Lead_Local_Time_Setting__c</members>
         <members>Opportunity</members>

@@ -183,20 +183,9 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     <fields>
         <fullName>Billing_Hours__c</fullName>
         <externalId>false</externalId>
-        <formula>TEXT(IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, Hours_12_format__c, Hour__c + Offset__c))</formula>
+        <formula>TEXT(IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, Hours_12_format__c, Account.Hour__c + Offset__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Billing Hours</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Billing_Minutes__c</fullName>
-        <externalId>false</externalId>
-        <formula>IF(GMT_Minutes__c &lt; 10, &quot;0&quot; &amp; TEXT(GMT_Minutes__c), TEXT(GMT_Minutes__c))</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Billing Minutes</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -211,7 +200,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     <fields>
         <fullName>Clock_Format__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(NOT(ISBLANK(Account_Local_Time_Setting__c)) &amp;&amp; NOT(Account_Local_Time_Setting__r.Use_12_Hour_Format__c), &quot;&quot;, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;))</formula>
+        <formula>IF(NOT(ISBLANK(Account_Local_Time_Setting__c)) &amp;&amp; NOT(Account_Local_Time_Setting__r.Use_12_Hour_Format__c), &quot;&quot;, IF(Account.Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Clock Format</label>
         <required>false</required>
@@ -302,35 +291,9 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
         <trackTrending>false</trackTrending>
     </fields>
     <fields>
-        <fullName>GMT_Minutes__c</fullName>
-        <externalId>false</externalId>
-        <formula>MINUTE(TIMEVALUE(NOW()))</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>GMT Minutes</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>0</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Hour__c</fullName>
-        <externalId>false</externalId>
-        <formula>HOUR(TIMENOW())</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Hour</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>0</scale>
-        <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Hours_12_format__c</fullName>
         <externalId>false</externalId>
-        <formula>IF ((Hour__c + Offset__c) &gt; 12, (Hour__c + Offset__c) - 12, Hour__c + Offset__c)</formula>
+        <formula>IF ((Account.Hour__c + Offset__c) &gt; 12, (Account.Hour__c + Offset__c) - 12, Account.Hour__c + Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hours 12 format</label>
         <precision>18</precision>
@@ -425,7 +388,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     <fields>
         <fullName>Time__c</fullName>
         <externalId>false</externalId>
-        <formula>Billing_Hours__c &amp; &quot;:&quot; &amp; Billing_Minutes__c</formula>
+        <formula>Billing_Hours__c &amp; &quot;:&quot; &amp; Account.Billing_Minutes__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Time</label>
         <required>false</required>

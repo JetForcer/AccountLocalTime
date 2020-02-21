@@ -12,7 +12,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Represents names of states</shortDescription>
-        <value>Colorado:Idaho:Montana:New Mexico:Utah:Wyoming</value>
+        <value>Colorado:Idaho:Montana:New Mexico:Utah</value>
     </labels>
     <labels>
         <fullName>States_In_GMT_Minus_8</fullName>

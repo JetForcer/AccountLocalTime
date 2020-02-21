@@ -29,6 +29,18 @@ public class TimeUtil {
 			if (setting != null && setting.localTimeJF__Use_Geolocation__c) {
 				return fetchAndInsertLeadData(leadVar.Id);
 			}
+		} else if (obj instanceof Account) {
+			Account acc = (Account)obj;
+			if (getLatitude(acc) == null || getLongitude(acc) == null) {
+				return null;
+			}
+
+			localTimeJF__Account_Local_Time_Setting__c setting
+					= manager.getAccountSetting(acc.localTimeJF__Account_Local_Time_Setting__c);
+
+			if (setting != null && setting.localTimeJF__Use_Geolocation__c) {
+				return fetchAndInsertAccountData(acc.Id);
+			}
 		}
 
 		return null;

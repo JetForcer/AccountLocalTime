@@ -7,7 +7,16 @@ public class ObjectManager {
 	}
 
 	public Account getAccount(Id accountId) {
-		return [SELECT Id, BillingLatitude, BillingLongitude FROM Account WHERE Id = : accountId LIMIT 1];
+		List<Account> accounts = [SELECT Id, Account_Local_Time_Setting__c, BillingLatitude, BillingLongitude
+								  FROM Account
+								  WHERE Id =: accountId
+								  LIMIT 1];
+
+		if (accounts.size() == 1) {
+			return accounts.get(0);
+		}
+
+		return null;
 	}
 
 	public Opportunity getOpportunity(Id opportunityId) {
@@ -44,6 +53,13 @@ public class ObjectManager {
 	public Lead_Local_Time_Setting__c getLeadSetting(Id settingId) {
 		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
 				FROM localTimeJF__Lead_Local_Time_Setting__c
+				WHERE Id =: settingId
+				LIMIT 1];
+	}
+
+	public Account_Local_Time_Setting__c getAccountSetting(Id settingId) {
+		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
+				FROM localTimeJF__Account_Local_Time_Setting__c
 				WHERE Id =: settingId
 				LIMIT 1];
 	}
