@@ -273,6 +273,7 @@
     </fields>
     <fields>
         <fullName>Clock_Format__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(NOT(ISBLANK(Lead_Local_Time_Setting__c)) &amp;&amp; NOT(Lead_Local_Time_Setting__r.Use_12_Hour_Format__c), &quot;&quot;, IF(Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -291,6 +292,7 @@
     </fields>
     <fields>
         <fullName>Country_Code__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Country Code</label>
         <length>25</length>
@@ -301,6 +303,7 @@
     </fields>
     <fields>
         <fullName>Country_Icon__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Lead_Local_Time_Setting__r.Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Country_Code__c &amp; &quot;/flat/16.png&quot;, Country_Code__c, 16, 16), IMAGE(&quot;/resource/1581936179000/localTimeJF__us_flag&quot;, &quot;US&quot;, 13, 16))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -311,6 +314,7 @@
     </fields>
     <fields>
         <fullName>Country__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Lead_Local_Time_Setting__r.Use_Geolocation__c, Country_Code__c, Country)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -352,6 +356,7 @@
     </fields>
     <fields>
         <fullName>GMT_Minutes__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>MINUTE(TIMEVALUE(NOW()))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -364,6 +369,7 @@
     </fields>
     <fields>
         <fullName>GMT_Offset__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>GMT Offset</label>
         <precision>2</precision>
@@ -383,6 +389,7 @@
     </fields>
     <fields>
         <fullName>Hour__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>HOUR(TIMENOW())</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -395,6 +402,7 @@
     </fields>
     <fields>
         <fullName>Hours_12_format__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF ((Hour__c + Offset__c) &gt; 12, (Hour__c + Offset__c) - 12, Hour__c + Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -407,6 +415,7 @@
     </fields>
     <fields>
         <fullName>Hours__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>TEXT(IF(Lead_Local_Time_Setting__r.Use_12_Hour_Format__c, Hours_12_format__c, Hour__c + Offset__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -440,6 +449,7 @@
     <fields>
         <fullName>Lead_Local_Time_Setting__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Lead Local Time Setting</label>
         <referenceTo>Lead_Local_Time_Setting__c</referenceTo>
@@ -451,6 +461,7 @@
     </fields>
     <fields>
         <fullName>Local_Time__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(ISBLANK(Country) || (NOT(Lead_Local_Time_Setting__r.Use_Geolocation__c) &amp;&amp; NOT(CONTAINS(&quot;US:United States&quot;, Country))), 
 &quot;Unable to define time&quot;, 
@@ -463,6 +474,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(State = &quot;&quot;, City, State) 
     </fields>
     <fields>
         <fullName>Minutes__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(GMT_Minutes__c &lt; 10, &quot;0&quot; &amp; TEXT(GMT_Minutes__c), TEXT(GMT_Minutes__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -496,6 +508,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(State = &quot;&quot;, City, State) 
     </fields>
     <fields>
         <fullName>Offset__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Lead_Local_Time_Setting__r.Use_Geolocation__c, GMT_Offset__c, USA_Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -588,6 +601,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(State = &quot;&quot;, City, State) 
     </fields>
     <fields>
         <fullName>Time__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>Hours__c &amp; &quot;:&quot; &amp; Minutes__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -598,6 +612,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(State = &quot;&quot;, City, State) 
     </fields>
     <fields>
         <fullName>Time_zone_display_name__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Time zone display name</label>
         <length>50</length>
@@ -612,6 +627,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(State = &quot;&quot;, City, State) 
     </fields>
     <fields>
         <fullName>USA_Offset__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(CONTAINS($Label.States_In_GMT_Minus_8, State), -8,
 IF(CONTAINS($Label.States_In_GMT_Minus_7, State), -7,

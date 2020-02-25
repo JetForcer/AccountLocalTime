@@ -152,6 +152,7 @@
     <fields>
         <fullName>Account_Local_Time_Setting__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Opportunity Local Time Setting</label>
         <referenceTo>Opportunity_Local_Time_Setting__c</referenceTo>
@@ -164,6 +165,7 @@
     </fields>
     <fields>
         <fullName>Account_local_time__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(ISBLANK(Account.Name) || (NOT(Account_Local_Time_Setting__r.Use_Geolocation__c) &amp;&amp; NOT(CONTAINS(&quot;US:United States&quot;, Account.BillingCountry))), 
 &quot;Unable to define time&quot;,
@@ -182,6 +184,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Billing_Hours__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>TEXT(IF(Account_Local_Time_Setting__r.Use_12_Hour_Format__c, Hours_12_format__c, Account.Hour__c + Offset__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -199,6 +202,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Clock_Format__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(NOT(ISBLANK(Account_Local_Time_Setting__c)) &amp;&amp; NOT(Account_Local_Time_Setting__r.Use_12_Hour_Format__c), &quot;&quot;, IF(Account.Hour__c + Offset__c &lt; 12, &quot;AM&quot;, &quot;PM&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -221,6 +225,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Country_Icon__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, IMAGE(&quot;https://www.countryflags.io/&quot; &amp; Account.Country_Code__c &amp; &quot;/flat/16.png&quot;, Account.Country_Code__c, 16, 16), IMAGE(&quot;/resource/1581936179000/localTimeJF__us_flag&quot;, &quot;US&quot;, 13, 16))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -232,6 +237,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Country__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, Account.Country_Code__c, Account.BillingCountry)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -292,6 +298,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Hours_12_format__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF ((Account.Hour__c + Offset__c) &gt; 12, (Account.Hour__c + Offset__c) - 12, Account.Hour__c + Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -341,6 +348,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Offset__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(Account_Local_Time_Setting__r.Use_Geolocation__c, Account.GMT_Offset__c, Account.USA_Offset__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -387,6 +395,7 @@ Country_Icon__c &amp; &quot; &quot; &amp; IF(Account.BillingState = &quot;&quot;
     </fields>
     <fields>
         <fullName>Time__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>Billing_Hours__c &amp; &quot;:&quot; &amp; Account.Billing_Minutes__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
