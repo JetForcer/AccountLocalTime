@@ -19,6 +19,11 @@ public class LocalTimeCustomizationController {
 			return getOrCreateAccountSetting((Account)obj, manager);
 		}
 
+		obj = manager.getContact(objectId);
+		if (obj != null) {
+			return getOrCreateContactSetting((Contact)obj, manager);
+		}
+
 		return null;
 	}
 
@@ -72,6 +77,24 @@ public class LocalTimeCustomizationController {
 		return manager.getOpportunitySetting(settingId);
 	}
 
+	private static localTimeJF__Contact_Local_Time_Setting__c getOrCreateContactSetting(Contact c,
+			localTimeJF.ObjectManager manager) {
+
+		Id settingId = c.localTimeJF__Contact_Local_Time_Setting__c;
+		if (settingId == null) {
+			localTimeJF__Contact_Local_Time_Setting__c created
+					= new localTimeJF__Contact_Local_Time_Setting__c();
+			insert created;
+
+			c.localTimeJF__Contact_Local_Time_Setting__c = created.Id;
+			update c;
+
+			return created;
+		}
+
+		return manager.getContactSetting(settingId);
+	}
+
 	@AuraEnabled
 	public static sObject fetchAndInsertGeoData(Id objectId) {
 		localTimeJF.ObjectManager manager = localTimeJF.ObjectManager.getInstance();
@@ -81,6 +104,9 @@ public class LocalTimeCustomizationController {
 		}
 		if (obj == null) {
 			obj = manager.getAccount(objectId);
+		}
+		if (obj == null) {
+			obj = manager.getContact(objectId);
 		}
 
 		return localTimeJF.TimeUtil.fetchAndInsertData(obj);

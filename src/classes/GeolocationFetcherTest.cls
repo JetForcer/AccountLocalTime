@@ -17,6 +17,14 @@ public with sharing class GeolocationFetcherTest {
         Test.stopTest();
     }
 
+    @IsTest
+    public static void testFetchForContact() {
+        Test.startTest();
+        Dom.Document result = localTimeJF.GeolocationFetcher.fetch(new Contact());
+        checkChildsExists(result);
+        Test.stopTest();
+    }
+
     private static void checkChildsExists(Dom.Document doc) {
         String countryCode = localTimeJF.DataWriter.getChildText(doc, 'countryCode');
         System.assertEquals('UA', countryCode);

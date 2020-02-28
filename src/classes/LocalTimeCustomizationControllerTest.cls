@@ -46,6 +46,21 @@ private class LocalTimeCustomizationControllerTest {
     }
 
     @IsTest
+    public static void testCreateSettingForContact() {
+        Test.startTest();
+
+        Contact c = localTimeJF.TestUtil.createTestContact();
+        insert c;
+
+        localTimeJF__Contact_Local_Time_Setting__c setting = (localTimeJF__Contact_Local_Time_Setting__c)
+                localTimeJF.LocalTimeCustomizationController.getOrCreateSetting(c.Id);
+
+        checkSettingAssignedToContact(c.Id, setting);
+
+        Test.stopTest();
+    }
+
+    @IsTest
     public static void testGetSettingForOpportunity() {
         Test.startTest();
 
@@ -100,6 +115,26 @@ private class LocalTimeCustomizationControllerTest {
                 localTimeJF.LocalTimeCustomizationController.getOrCreateSetting(acc.Id);
 
         checkSettingAssignedToAccount(acc.Id, actualSetting);
+        System.assertEquals(expectedSettingId, actualSetting.Id);
+
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void testGetSettingForContact() {
+        Test.startTest();
+
+        localTimeJF__Contact_Local_Time_Setting__c expectedSetting = new localTimeJF__Contact_Local_Time_Setting__c();
+        insert expectedSetting;
+        Contact c = localTimeJF.TestUtil.createTestContact();
+        Id expectedSettingId = expectedSetting.Id;
+        c.localTimeJF__Contact_Local_Time_Setting__c = expectedSettingId;
+        insert c;
+
+        localTimeJF__Contact_Local_Time_Setting__c actualSetting = (localTimeJF__Contact_Local_Time_Setting__c)
+                localTimeJF.LocalTimeCustomizationController.getOrCreateSetting(c.Id);
+
+        checkSettingAssignedToContact(c.Id, actualSetting);
         System.assertEquals(expectedSettingId, actualSetting.Id);
 
         Test.stopTest();
@@ -166,6 +201,26 @@ private class LocalTimeCustomizationControllerTest {
         Test.stopTest();
     }
 
+    @IsTest
+    public static void testFetchAndInsertGeoDataForContact() {
+        Test.startTest();
+
+        localTimeJF__Contact_Local_Time_Setting__c setting = new localTimeJF__Contact_Local_Time_Setting__c();
+        setting.localTimeJF__Use_Geolocation__c = true;
+        insert setting;
+
+        Contact c = localTimeJF.TestUtil.createTestContact();
+        c.localTimeJF__Contact_Local_Time_Setting__c = setting.Id;
+        c.MailingLatitude = 50.460225;
+        c.MailingLongitude = 30.622090;
+        insert c;
+
+        Contact result = (Contact) localTimeJF.LocalTimeCustomizationController.fetchAndInsertGeoData(c.Id);
+        localTimeJF.TestUtil.checkFields(result);
+
+        Test.stopTest();
+    }
+
     private static void checkSettingAssignedToOpportunity(Id opportunityId, Opportunity_Local_Time_Setting__c setting) {
         Opportunity opp = [SELECT localTimeJF__Account_Local_Time_Setting__c FROM Opportunity WHERE Id =: opportunityId];
         System.assert(setting != null);
@@ -185,5 +240,12 @@ private class LocalTimeCustomizationControllerTest {
         System.assert(setting != null);
         System.assert(setting.Id != null);
         System.assertEquals(setting.Id, acc.localTimeJF__Account_Local_Time_Setting__c);
+    }
+
+    private static void checkSettingAssignedToContact(Id contactId, Contact_Local_Time_Setting__c setting) {
+        Contact c = [SELECT localTimeJF__Contact_Local_Time_Setting__c FROM Contact WHERE Id =: contactId];
+        System.assert(setting != null);
+        System.assert(setting.Id != null);
+        System.assertEquals(setting.Id, c.localTimeJF__Contact_Local_Time_Setting__c);
     }
 }

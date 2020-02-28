@@ -43,6 +43,18 @@ public class ObjectManager {
 		return null;
 	}
 
+	public Contact getContact(Id contactId) {
+		List<Contact> contacts = [SELECT localTimeJF__Contact_Local_Time_Setting__c, MailingLatitude, MailingLongitude
+								  FROM Contact
+								  WHERE Id =: contactId
+								  LIMIT 1];
+		if (contacts.size() == 1) {
+			return contacts.get(0);
+		}
+
+		return null;
+	}
+
 	public Opportunity_Local_Time_Setting__c getOpportunitySetting(Id settingId) {
 		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
 				FROM localTimeJF__Opportunity_Local_Time_Setting__c
@@ -60,6 +72,13 @@ public class ObjectManager {
 	public Account_Local_Time_Setting__c getAccountSetting(Id settingId) {
 		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
 				FROM localTimeJF__Account_Local_Time_Setting__c
+				WHERE Id =: settingId
+				LIMIT 1];
+	}
+
+	public Contact_Local_Time_Setting__c getContactSetting(Id settingId) {
+		return [SELECT localTimeJF__Use_12_Hour_Format__c, localTimeJF__Use_Geolocation__c
+				FROM Contact_Local_Time_Setting__c
 				WHERE Id =: settingId
 				LIMIT 1];
 	}

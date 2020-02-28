@@ -41,6 +41,18 @@ public class TimeUtil {
 			if (setting != null && setting.localTimeJF__Use_Geolocation__c) {
 				return fetchAndInsertAccountData(acc.Id);
 			}
+		} else if (obj instanceof Contact) {
+			Contact c = (Contact)obj;
+			if (getLatitude(c) == null || getLongitude(c) == null) {
+				return null;
+			}
+
+			localTimeJF__Contact_Local_Time_Setting__c setting
+					= manager.getContactSetting(c.localTimeJF__Contact_Local_Time_Setting__c);
+
+			if (setting != null && setting.localTimeJF__Use_Geolocation__c) {
+				return fetchAndInsertContactData(c.Id);
+			}
 		}
 
 		return null;
@@ -60,6 +72,14 @@ public class TimeUtil {
 		localTimeJF.DataWriter.write(result, leadVar);
 		update leadVar;
 		return leadVar;
+	}
+
+	public static Contact fetchAndInsertContactData(Id contactId) {
+		Contact contactVar = localTimeJF.ObjectManager.getInstance().getContact(contactId);
+		Dom.Document result = localTimeJF.GeolocationFetcher.fetch(contactVar);
+		localTimeJF.DataWriter.write(result, contactVar);
+		update contactVar;
+		return contactVar;
 	}
 
 	public static Boolean isGeocodesChanged(List<sObject> oldObjects, List<sObject> newObjects) {
@@ -88,6 +108,8 @@ public class TimeUtil {
 			return ((Account)obj).BillingLatitude;
 		} else if (obj instanceof Lead) {
 			return ((Lead)obj).Latitude;
+		} else if (obj instanceof Contact) {
+			return ((Contact)obj).MailingLatitude;
 		}
 
 		return null;
@@ -98,6 +120,8 @@ public class TimeUtil {
 			return ((Account)obj).BillingLongitude;
 		} else if (obj instanceof Lead) {
 			return ((Lead)obj).Longitude;
+		} else if (obj instanceof Contact) {
+			return ((Contact)obj).MailingLongitude;
 		}
 
 		return null;

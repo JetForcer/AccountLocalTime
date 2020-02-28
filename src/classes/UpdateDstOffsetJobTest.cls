@@ -45,4 +45,28 @@ private class UpdateDstOffsetJobTest {
 
         Test.stopTest();
     }
+
+    @IsTest
+    public static void testUpdateForContact() {
+        Test.startTest();
+
+        Contact c = localTimeJF.TestUtil.createTestContact();
+        c.MailingLatitude = 50.460225;
+        c.MailingLongitude = 30.622090;
+        insert c;
+
+        List<Contact> contacts = new List<Contact>();
+        contacts.add(c);
+
+        localTimeJF.UpdateDstOffsetJob job = new localTimeJF.UpdateDstOffsetJob(contacts);
+        job.execute(null);
+
+        c = [SELECT localTimeJF__Country_Code__c, localTimeJF__GMT_Offset__c, localTimeJF__Time_zone_display_name__c
+        FROM Contact
+        WHERE Id =: c.Id];
+
+        localTimeJF.TestUtil.checkFields(c);
+
+        Test.stopTest();
+    }
 }

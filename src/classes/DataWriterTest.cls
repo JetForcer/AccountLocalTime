@@ -22,4 +22,15 @@ public with sharing class DataWriterTest {
         localTimeJF.TestUtil.checkFields(l);
         Test.stopTest();
     }
+
+    @IsTest
+    public static void testWriteForContact() {
+        Test.startTest();
+        Contact c = new Contact();
+        Dom.Document doc = localTimeJF.GeolocationFetcher.fetch(c);
+        localTimeJF.DataWriter.write(doc, c);
+
+        localTimeJF.TestUtil.checkFields(c);
+        Test.stopTest();
+    }
 }

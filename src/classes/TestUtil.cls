@@ -12,6 +12,12 @@ public with sharing class TestUtil {
         System.assertEquals('Eastern European Standard Time', l.localTimeJF__Time_zone_display_name__c);
     }
 
+    public static void checkFields(Contact c) {
+        System.assertEquals('UA', c.localTimeJF__Country_Code__c);
+        System.assertEquals(2, c.localTimeJF__GMT_Offset__c);
+        System.assertEquals('Eastern European Standard Time', c.localTimeJF__Time_zone_display_name__c);
+    }
+
     public static Account createTestAccount() {
         return new Account(Name='Test account', BillingLatitude=50.460225, BillingLongitude=30.622090);
     }
@@ -24,5 +30,9 @@ public with sharing class TestUtil {
 
     public static Lead createTestLead() {
         return new Lead(LastName='Test Lead', Company='Test company');
+    }
+
+    public static Contact createTestContact() {
+        return new Contact(LastName='Test Contact', MailingLatitude=50.460225, MailingLongitude=30.622090);
     }
 }

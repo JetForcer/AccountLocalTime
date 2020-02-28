@@ -11,6 +11,10 @@ public class GeolocationFetcher {
 		return sendRequestAndGetDocument(formatUrl(leadVar.Latitude, leadVar.Longitude));
 	}
 
+	public static Dom.Document fetch(Contact contactVar) {
+		return sendRequestAndGetDocument(formatUrl(contactVar.MailingLatitude, contactVar.MailingLongitude));
+	}
+
 	private static String formatUrl(Decimal latitude, Decimal longitude) {
 		return String.format(TIMEZONEDB_URL, new List<Decimal>{latitude, longitude});
 	}

@@ -18,6 +18,9 @@ public class DataWriter {
 		else if (obj instanceof Lead) {
 			((Lead)obj).localTimeJF__Country_Code__c = code;
 		}
+		else if (obj instanceof Contact) {
+			((Contact)obj).localTimeJF__Country_Code__c = code;
+		}
 	}
 
 	public static void insertGmtOffsetIfPossible(Dom.Document doc, sObject obj) {
@@ -34,6 +37,9 @@ public class DataWriter {
 		}
 		else if (obj instanceof Lead) {
 			((Lead)obj).localTimeJF__GMT_Offset__c = offset;
+		}
+		else if (obj instanceof Contact) {
+			((Contact)obj).localTimeJF__GMT_Offset__c = offset;
 		}
 	}
 
@@ -72,6 +78,9 @@ public class DataWriter {
 		}
 		else if (obj instanceof Lead) {
 			((Lead)obj).localTimeJF__Time_zone_display_name__c = words;
+		}
+		else if (obj instanceof Contact) {
+			((Contact)obj).localTimeJF__Time_zone_display_name__c = words;
 		}
 	}
 

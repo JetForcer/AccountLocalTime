@@ -8,6 +8,7 @@
         <members>HttpCalloutMockImpl</members>
         <members>LocalTimeCustomizationController</members>
         <members>LocalTimeCustomizationControllerTest</members>
+        <members>ObjectManager</members>
         <members>TestUtil</members>
         <members>TimeUtil</members>
         <members>UpdateDstOffsetJob</members>
@@ -17,6 +18,7 @@
     <types>
         <members>UpdateDstOffsetOnAccount</members>
         <members>UpdateGmtOffsetOnLead</members>
+        <members>UpdateGmtOffsetOnContact</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -24,6 +26,7 @@
         <members>leadLocalTimeCustomization</members>
         <members>localTimeCustomizationService</members>
         <members>opportunityLocalTimeCustomization</members>
+        <members>contactLocalTimeCustomization</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
@@ -37,6 +40,8 @@
         <members>Lead_Local_Time_Setting__c</members>
         <members>Opportunity</members>
         <members>Opportunity_Local_Time_Setting__c</members>
+        <members>Contact</members>
+        <members>Contact_Local_Time_Setting__c</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -48,6 +53,7 @@
         <members>Opportunity.Customize_Local_Time_Classic</members>
         <members>Opportunity.Customize_Local_Time_Lightning</members>
         <members>Account.Customize_Local_Time_Lightning</members>
+        <members>Contact.Customize_Local_Time_Lightning</members>
         <name>QuickAction</name>
     </types>
     <types>

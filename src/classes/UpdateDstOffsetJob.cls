@@ -14,6 +14,9 @@ public class UpdateDstOffsetJob implements Database.AllowsCallouts, Queueable {
 			else if (obj instanceof Lead) {
 				localTimeJF.TimeUtil.fetchAndInsertLeadData(obj.Id);
 			}
+			else if (obj instanceof Contact) {
+				localTimeJF.TimeUtil.fetchAndInsertContactData(obj.Id);
+			}
 		}
 	}
 }
